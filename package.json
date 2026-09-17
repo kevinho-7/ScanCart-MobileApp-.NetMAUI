@@ -1,0 +1,13 @@
+{
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "eslint": "^10.10.0",
+    "tailwindcss": "^4.3.3"
+  },
+  "scripts": {
+    "css:watch": "npx @tailwindcss/cli -i ./wwwroot/css/input.css -o ./wwwroot/css/output.css --watch"
+  },
+  "dependencies": {
+    "flowbite": "^4.0.2"
+  }
+}

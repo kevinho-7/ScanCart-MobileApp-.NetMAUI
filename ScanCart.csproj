@@ -72,4 +72,17 @@
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <EditorConfigFiles Remove="D:\Documents\BYU-Projects\ScanCart\.editorconfig" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="D:\Documents\BYU-Projects\ScanCart\.editorconfig" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Components\Shared\" />
+      <Folder Include="wwwroot\Images\" />
+    </ItemGroup>
+
 </Project>

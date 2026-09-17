@@ -1,5 +1,64 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+<div class="min-h-screen bg-[#a9cfe2] p-8">
+    <div class="mx-auto max-w-lg flex flex-col gap-4">
 
-Welcome to your new app.
+        <!-- Scan Barcode -->
+        <a href="/scan"
+           class="bg-neutral-primary-soft flex items-center w-full p-4
+            border border-default rounded-base
+            shadow-md
+            transition-all duration-200 ease-out
+            hover:-translate-y-1 hover:shadow-lg
+            hover:bg-neutral-secondary-medium
+            active:scale-[0.98]">
+
+            <div class="w-24 h-20 shrink-0 flex items-center justify-center overflow-hidden rounded-base">
+                <img src="Images/barcode-scancart.png"
+                     alt="Barcode"
+                     class="w-full h-full object-contain" />
+            </div>
+
+            <div class="ml-4">
+                <h5 class="text-xl font-semibold tracking-tight text-heading">
+                    Scan Barcode
+                </h5>
+
+                <p class="mt-1 text-sm text-body">
+                    Scan a product barcode
+                </p>
+            </div>
+
+        </a>
+
+
+        <!-- My Cart -->
+        <a href="/cart"
+           class="bg-neutral-primary-soft flex items-center w-full p-4
+            border border-default rounded-base
+            shadow-md
+            transition-all duration-200 ease-out
+            hover:-translate-y-1 hover:shadow-lg
+            hover:bg-neutral-secondary-medium
+            active:scale-[0.98]">
+
+            <div class="w-24 h-20 shrink-0 flex items-center justify-center overflow-hidden rounded-base">
+                <img src="Images/shoppingCart-scancart.png"
+                     alt="Shopping cart"
+                     class="w-full h-full object-contain" />
+            </div>
+
+            <div class="ml-4">
+                <h5 class="text-xl font-semibold tracking-tight text-heading">
+                    My Cart
+                </h5>
+
+                <p class="mt-1 text-sm text-body">
+                    View your shopping cart
+                </p>
+            </div>
+
+        </a>
+
+    </div>
+</div>

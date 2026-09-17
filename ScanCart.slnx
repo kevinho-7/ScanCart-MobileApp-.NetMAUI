@@ -1,3 +1,5 @@
 <Solution>
-  <Project Path="ScanCart.csproj" />
+  <Project Path="ScanCart.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
 </Solution>
