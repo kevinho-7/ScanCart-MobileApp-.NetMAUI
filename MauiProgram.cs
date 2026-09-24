@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using ScanCart.Services;
+using ZXing.Net.Maui.Controls;
 
 namespace ScanCart
 {
@@ -9,15 +11,18 @@ namespace ScanCart
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseBarcodeReader()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 });
 
             builder.Services.AddMauiBlazorWebView();
+            builder.Services.AddScoped<BarcodeService>();
+
 
 #if DEBUG
-    		builder.Services.AddBlazorWebViewDeveloperTools();
+            builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();
 #endif
 

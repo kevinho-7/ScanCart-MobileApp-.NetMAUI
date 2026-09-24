@@ -5,7 +5,8 @@
     "tailwindcss": "^4.3.3"
   },
   "scripts": {
-    "css:watch": "npx @tailwindcss/cli -i ./wwwroot/css/input.css -o ./wwwroot/css/output.css --watch"
+    "css:watch": "npx @tailwindcss/cli -i ./wwwroot/css/input.css -o ./wwwroot/css/output.css --watch",
+    "android": "emulator.exe @pixel_7_-_api_36_0 -camera-back webcam1"
   },
   "dependencies": {
     "flowbite": "^4.0.2"
