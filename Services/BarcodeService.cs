@@ -7,22 +7,31 @@ namespace ScanCart.Services
 {
     public class BarcodeService
     {
-       public async Task OpenScannerAsync()
+       public async Task<string> ScanAsync()
         {
-            // --> Takes MUAIs main page
+            var source = new TaskCompletionSource<string?>();
+
+            // --> It takes MUAIs main page
             var page = Application.Current?.Windows[0].Page; 
 
             if(page == null)
             {
-                return;
+                return null!;
             }
+
+            var scannerPage = new ScannerPage(source);
 
             await MainThread.InvokeOnMainThreadAsync(async () =>
             {
-                // --> (page.Navigation: access MAUIs system navigation)
-                // --> (PushModalAsync(new ScannerPage()) Open the freaking ScannerPage
-                await page.Navigation.PushModalAsync(new ScannerPage());   
+                // --> (page.Navigation: It access MAUIs system navigation)
+                // --> (PushModalAsync(new ScannerPage()) It     opens the freaking ScannerPage
+                await page.Navigation.PushModalAsync(scannerPage);   
+
             });
+
+            var barcode = await source.Task;
+
+            return barcode!;
         }
     }
 }

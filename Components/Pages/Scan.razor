@@ -1,27 +1,34 @@
 ﻿@page "/scan"
 
 @using ScanCart.Services
+
+@inject NavigationManager _navigationManager;
 @inject BarcodeService _barcodeService;
+@inject ProductService _productService;
 
 <div class="min-h-screen bg-[#a9cfe2] flex flex-col">
 
-    <div class="flex items-center gap-3 px-5 py-4 bg-[#0F172A] text-white">
-        
-        <button
-                class="p-2 rounded-lg hover:bg-slate-700 active:scale-95 transition-all duration-150">
-            ←
-        </button>
+    <!-- Back to Home -->
+    <button @onclick="GoBack"
+        class="inline-flex items-center gap-2 mb-6
+        text-heading font-medium
+        transition-all duration-200
+        hover:-translate-x-1">
 
-        <div>
-            <h1 class="text-lg font-semibold">
-                Scan Product
-            </h1>
+        <svg class="w-5 h-5"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor">
 
-            <p class="text-xs text-slate-400">
-                Scan the product barcode
-            </p>
-        </div>
-    </div>
+            <path stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 19l-7-7 7-7" />
+        </svg>
+
+        Back to Home
+    </button>
 
     <main class="flex-1 flex flex-col items-center justify-center px-5 py-8">
 
@@ -51,7 +58,7 @@
 
             </div>
 
-            <button @onclick="StartScanner"
+            <button @onclick="GoToProductPage"
                     class="w-full mt-6 px-5 py-3
                 rounded-xl
                 bg-[#0F172A]
@@ -74,17 +81,27 @@
 
 @code {
 
-
-
-    private async Task StartScanner()
+    private async Task GoToProductPage()
     {
-        await _barcodeService.OpenScannerAsync();   
+        var barcode = await _barcodeService.ScanAsync();
 
-        // await Task.CompletedTask;
-    }   
+        if (String.IsNullOrWhiteSpace(barcode))
+        {
+            return;
+        }
+
+        var product = await _productService.GetProductAsync(barcode);
+
+        if(product == null)
+        {
+            return;
+        }
+
+        _navigationManager.NavigateTo("/product");
+    }
 
     private void GoBack()
     {
-        // NavigationManager.NavigateTo("/");  
+        _navigationManager.NavigateTo("/");  
     }
 }

@@ -19,6 +19,7 @@ namespace ScanCart
 
             builder.Services.AddMauiBlazorWebView();
             builder.Services.AddScoped<BarcodeService>();
+            builder.Services.AddScoped<ProductService>();
 
 
 #if DEBUG

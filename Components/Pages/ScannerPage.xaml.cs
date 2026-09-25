@@ -4,24 +4,54 @@ namespace ScanCart.Components.Pages;
 
 public partial class ScannerPage : ContentPage
 {
-	public ScannerPage()
-	{
-		InitializeComponent();
+    private readonly TaskCompletionSource<string?> _barcodeSource;
+    private bool _barcodeFound = false;
 
-        cameraBarcodeReaderView.BarcodesDetected += BarcodesDetected!;
+    public ScannerPage(TaskCompletionSource<string?> barcodeSource)
+    {
+        InitializeComponent();
+
+        _barcodeSource = barcodeSource;
+
+        cameraBarcodeReaderView.Options = new BarcodeReaderOptions
+        {
+            Formats = BarcodeFormats.OneDimensional,
+            AutoRotate = true,
+            Multiple = false,
+            TryHarder = true,
+            DelayBetweenAnalyzingFrames = 50,
+            InitialDelayBeforeAnalyzingFrames = 300,
+            DelayBetweenContinuousScans = 1000
+        };
+
+        cameraBarcodeReaderView.BarcodesDetected += BarcodesDetected;
     }
 
-    protected async void BarcodesDetected(object sender, BarcodeDetectionEventArgs e)
+    private void BarcodesDetected(
+    object sender,
+    BarcodeDetectionEventArgs e)
     {
-        foreach(var barcode in e.Results)
+        if (_barcodeFound)
         {
-            await DisplayAlertAsync(
-                "Barcode detected",
-                $"Code: {barcode.Value}",
-                "Ok"
-            );
-
-            Console.WriteLine($"Code: {barcode.Value}");
+            return;
         }
+
+        var barcode = e.Results.FirstOrDefault();
+
+        if (barcode == null)
+        {
+            return;
+        }
+
+        _barcodeFound = true;
+
+        MainThread.BeginInvokeOnMainThread(async () =>
+        {
+            barcodeResult.Text = $"Code: {barcode.Value}";
+
+            _barcodeSource.SetResult(barcode.Value);
+
+            await Navigation.PopModalAsync();
+        });
     }
 }
