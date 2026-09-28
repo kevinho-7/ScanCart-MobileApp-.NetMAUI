@@ -6,6 +6,9 @@ ScanCart is a mobile app for scanning product barcodes and viewing product infor
 
 The app shows the product name, brand, image, and quantity when this information is available.
 
+### Video Demo
+- [ScanCart Demo](https://youtu.be/eEDaVwjb7ys)
+
 ## Development Environment
 
 This project uses:
