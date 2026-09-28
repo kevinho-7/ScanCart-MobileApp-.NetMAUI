@@ -7,7 +7,7 @@ namespace ScanCart
     public static class MauiProgram
     {
         public static MauiApp CreateMauiApp()
-        {
+        { 
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
@@ -20,6 +20,7 @@ namespace ScanCart
             builder.Services.AddMauiBlazorWebView();
             builder.Services.AddScoped<BarcodeService>();
             builder.Services.AddScoped<ProductService>();
+            builder.Services.AddScoped<LocalStorageService>();
 
 
 #if DEBUG
